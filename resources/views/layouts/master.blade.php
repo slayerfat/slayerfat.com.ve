@@ -38,7 +38,7 @@ twitter: @slayerfat
   <!-- Yielded -->
   @yield('css')
 </head>
-<body id="layout-master">
+<body id="app">
 {{--@include('layouts.navbar')--}}
 
 @yield('content')
