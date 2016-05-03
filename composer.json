@@ -8,6 +8,7 @@
     }
   ],
   "require": {
+    "alaouy/youtube": "dev-master",
     "php": ">=7.0",
     "laravel/framework": "5.2.*",
     "jenssegers/date": "^3.2",

@@ -40,10 +40,12 @@ Google hire me:
   @yield('css')
 </head>
 <body id="app">
-<meta id="token" value="{{ csrf_token() }}">
+<meta id="token" value="{{ csrf_token() }}" content="{{ csrf_token() }}" property="{{ csrf_token() }}">
 
 @yield('content')
 
+<script src="{{ asset('js/jquery.js') }}"></script>
+<script src="{{ asset('js/jquery.lazyload.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 
 <!-- Yielded -->

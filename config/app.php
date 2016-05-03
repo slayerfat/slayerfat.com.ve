@@ -160,6 +160,7 @@ return [
          * vendor providers
          */
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Alaouy\Youtube\YoutubeServiceProvider::class,
     ],
 
     /*

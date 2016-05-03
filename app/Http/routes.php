@@ -8,3 +8,7 @@ Route::get('/', function () {
 
     return view('index', compact('background'));
 });
+
+Route::get('/videos', ['as' => 'videos.index', 'uses' => 'VideosController@index']);
+Route::get('/videos/{id}', ['as' => 'videos.index', 'uses' => 'VideosController@show']);
+Route::get('/videos/uploads/latest', ['as' => 'videos.index', 'uses' => 'VideosController@latestUploads']);
