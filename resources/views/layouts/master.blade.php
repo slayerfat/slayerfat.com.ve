@@ -21,8 +21,9 @@
 ░░░░░░▀▄▄▄▄▄▄▀▀▀▒▒▒▒▒▄▄▀░░░░░
 ░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▀▀░░░░░░░░
 Google hire me:
-twitter: @slayerfat
-  Alejandro Granadillo Palau slayerfat@gmail.com.
+  twitter: @slayerfat
+  Alejandro Granadillo Palau
+  slayerfat@gmail.com.
 -->
 <head>
   <meta charset="utf-8">
@@ -39,15 +40,13 @@ twitter: @slayerfat
   @yield('css')
 </head>
 <body id="app">
-{{--@include('layouts.navbar')--}}
+<meta id="token" value="{{ csrf_token() }}">
 
 @yield('content')
 
-{{--@include('layouts.footer')--}}
+<script src="{{ asset('js/app.js') }}"></script>
 
-{{--<script src="{{ elixir('js/all.js') }}"></script>--}}
-
-  <!-- Yielded -->
+<!-- Yielded -->
 @yield('js')
 </body>
 </html>

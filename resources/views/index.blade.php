@@ -1,9 +1,13 @@
 @extends('layouts.master')
 
-@section('content')
-  <greeter></greeter>
+@section('css')
+  <style>
+    .greeter {
+      background-image: url({{ asset($background) }});
+    }
+  </style>
 @endsection
 
-@section('js')
-  <script src="{{ asset('js/app.js') }}"></script>
+@section('content')
+  <greeter></greeter>
 @endsection

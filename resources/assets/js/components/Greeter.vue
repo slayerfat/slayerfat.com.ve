@@ -9,10 +9,12 @@
             </div>
             <div class="row align-spaced">
                 <div v-for="link in links" class="small-12 medium-2 columns">
-                    <a :href="link.url">
-                        <i :class="link.className | fontAwesomeClass"></i>
-                        {{ link.name }}
-                    </a>
+                    <h1>
+                        <a :href="link.url" :title="link.title">
+                            <i :class="link.className | fontAwesomeClass"></i>
+                            {{ link.name }}
+                        </a>
+                    </h1>
                 </div>
             </div>
         </div>
@@ -29,21 +31,42 @@
 
                 descList: [
                     'Programación, ingeniería de software, estructura de datos y mas.',
+                    'PHP 7 > PHP 5.',
                     'Creador del Código T, los Trululus, Maria Sofia y Cafe Pedro Lopez.',
                     'Saaaaaaaaaaaludos a todos!',
+                    'También conocido como wachi.',
+                    'slayerfat, el único e inigualable, campeón del Código A, S y T en Starcraft 2.',
+                    'Control de version de código fuente.',
+                    'Adicto innecesario del perfeccionismo, lo correcto y lo exacto.',
                     'Narrador, comentarista, aficionado de los números, amante de los Zerg.',
                     'Creador de contenidos multimedia web 2.0',
-                    'Mago manipulador de entidades y relaciones nivel 10',
+                    'Mago de entidades, relaciones y flujo de datos nivel 8.',
                     'Modelo, Vista, Controlador, Entidad, Relación, Metodología.'
                 ],
 
                 links: [
-                    {url: '/blog', className: 'pencil'},
-                    {url: '/videos', className: 'play'},
-                    {url: 'http://www.twitter.com/slayerfat', className: 'twitter'},
-                    {url: 'http://www.facebook.com/slayerfat', className: 'facebook'},
-                    {url: 'https://plus.google.com/112944288001461665013', className: 'google-plus'},
-                    {url: 'http://www.github.com/slayerfat', className: 'github'}
+                    {title: 'Blog de Alejandro slayerfat Granadillo', url: '/blog', className: 'pencil'},
+                    {title: 'Videos en youtube de Alejandro slayerfat Granadillo', url: '/videos', className: 'play'},
+                    {
+                        title: 'Alejandro slayerfat Granadillo en twitter @slayerfat',
+                        url: 'http://www.twitter.com/slayerfat',
+                        className: 'twitter'
+                    },
+                    {
+                        title: 'Alejandro slayerfat Granadillo en Facebook',
+                        url: 'http://www.facebook.com/slayerfat',
+                        className: 'facebook'
+                    },
+                    {
+                        title: 'Alejandro slayerfat Granadillo en google plus',
+                        url: 'https://plus.google.com/112944288001461665013',
+                        className: 'google-plus'
+                    },
+                    {
+                        title: 'Perfil en Github de Alejandro slayerfat Granadillo',
+                        url: 'http://www.github.com/slayerfat',
+                        className: 'github'
+                    }
                 ]
             };
         },
@@ -68,14 +91,22 @@
 
 <style>
     .greeter {
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        background-color: #464646;
         width: 100%;
         height: 100%;
         position: relative;
         display: table;
         text-align: center;
+        color: white;
+        text-shadow: 0 0 10px black;
     }
 
     .greeter-contents {
+        background-color: rgba(10, 10, 10, 0.3);
         display: table-cell;
         vertical-align: middle;
     }

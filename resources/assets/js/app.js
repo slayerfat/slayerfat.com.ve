@@ -1,4 +1,7 @@
 var Vue = require('vue');
+Vue.use(require('vue-resource'));
+Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
+
 import Greeter from './components/Greeter.vue';
 
 Vue.filter('fontAwesomeClass', function (value) {
