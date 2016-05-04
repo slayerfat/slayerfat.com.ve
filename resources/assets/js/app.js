@@ -4,6 +4,7 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAt
 
 import Greeter from './components/Greeter.vue';
 import Videos from './components/Videos.vue';
+import Navbar from './components/Navbar.vue';
 
 Vue.filter('fontAwesomeClass', function (value) {
     return 'fa fa-' + value;
@@ -17,6 +18,7 @@ new Vue({
     el: '#app',
 
     components: {
+        navbar: Navbar,
         greeter: Greeter,
         videos: Videos
     }
