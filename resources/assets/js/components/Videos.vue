@@ -1,5 +1,14 @@
 <template>
-    {{{ $data.html }}}
+    <div class="row align-spaced" v-for="video in videos">
+        <div class="small-9 columns">
+            <div class="flex-video widescreen">
+                <iframe width="420" height="315"
+                        :src="video.url"
+                        frameborder="0" allowfullscreen
+                ></iframe>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -14,33 +23,11 @@
 
         created() {
             this.$http.get('/videos/uploads/latest', function (videos) {
-                this.videos = videos;
-                let that = this;
-                let row = '<div class="row">';
-                let column = '<div class="column  large-3 small-6">';
-                let tail = '</div>';
-                let i = 0;
-
-                this.videos.forEach(function (video) {
-                    if (i === 0) {
-                        that.html = that.html + row;
-                    }
-
-                    that.html = that.html + column
-                            + `<div style="min-height: 180px">
-                            <img
-                            class="thumbnail lazy-img"
-                            data-original="${video.snippet.thumbnails.high.url}"
-                            ></div>`
-                            + tail;
-
-                    i++;
-
-                    if (i === 4) {
-                        that.html = that.html + tail;
-                        i = 0;
-                    }
+                videos.forEach(function(video, index, videos) {
+                    video.url = `https://www.youtube.com/embed/${video.contentDetails.videoId}`;
+                    videos[index] = video;
                 });
+                this.videos = videos;
             });
         }
     };

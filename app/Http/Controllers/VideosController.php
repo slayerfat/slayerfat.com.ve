@@ -19,7 +19,7 @@ class VideosController extends Controller
 
     public function latestUploads()
     {
-        $uploads = Youtube::getPlaylistItemsByPlaylistId(env('YOUTUBE_UPLOADS_ID'));
+        $uploads = Youtube::getPlaylistItemsByPlaylistId(env('YOUTUBE_UPLOADS_ID'), false, 5);
         $uploads = $uploads['results'];
 
         return $uploads;

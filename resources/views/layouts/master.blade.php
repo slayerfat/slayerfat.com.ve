@@ -44,8 +44,6 @@ Google hire me:
 
 @yield('content')
 
-<script src="{{ asset('js/jquery.js') }}"></script>
-<script src="{{ asset('js/jquery.lazyload.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 
 <!-- Yielded -->
