@@ -9,8 +9,8 @@
 </template>
 
 <script>
-    import Navbar from "./Navbar.vue";
-    import MyFooter from "./Footer.vue";
+    import Navbar from "./../Navbar.vue";
+    import MyFooter from "./../Footer.vue";
     export default {
         data () {
             return {

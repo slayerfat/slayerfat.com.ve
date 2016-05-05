@@ -6,11 +6,11 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAt
 var VueRouter = require('vue-router');
 Vue.use(VueRouter);
 
-import Greeter from './components/Greeter.vue';
-import Videos from './components/Videos.vue';
-import Navbar from './components/Navbar.vue';
-import Footer from './components/Footer.vue';
-import Tags from './components/Tags.vue';
+import Greeter from './Components/Greeter.vue';
+import Videos from './Components/Videos/Videos.vue';
+import Navbar from './Components/Navbar.vue';
+import Footer from './Components/Footer.vue';
+import Tags from './Components/Tags/Tags.vue';
 
 Vue.filter('fontAwesomeClass', function (value) {
     return 'fa fa-' + value;
