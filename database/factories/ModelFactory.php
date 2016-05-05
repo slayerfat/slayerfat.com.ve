@@ -15,7 +15,7 @@ $factory->define(App\Post::class, function (Faker\Generator $faker) {
     return [
         'user_id'       => 1,
         'title'         => $faker->word,
-        'desc'          => $faker->sentence,
+        'summary'       => $faker->sentence,
         'body'          => $faker->paragraphs(5, true),
         'thumbnail_url' => 'http://i.imgur.com/i0YU4Zt.gif',
         'publish_date'  => Carbon\Carbon::now(),
