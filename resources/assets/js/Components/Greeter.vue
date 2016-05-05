@@ -8,6 +8,14 @@
                 </div>
             </div>
             <div class="row align-spaced">
+                <div v-for="link in localLinks" class="small-12 medium-2 columns">
+                    <h1>
+                        <a v-link="link.url" :title="link.title">
+                            <i :class="link.className | fontAwesomeClass"></i>
+                            {{ link.name }}
+                        </a>
+                    </h1>
+                </div>
                 <div v-for="link in links" class="small-12 medium-2 columns">
                     <h1>
                         <a :href="link.url" :title="link.title">

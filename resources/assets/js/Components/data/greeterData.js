@@ -18,9 +18,19 @@ export default {
         'Modelo, Vista, Controlador, Entidad, Relación, Metodología.'
     ],
 
+    localLinks: [
+        {
+            title: 'Blog de Alejandro slayerfat Granadillo',
+            url: '/blog',
+            className: 'pencil'
+        },
+        {
+            title: 'Videos en youtube de Alejandro slayerfat Granadillo',
+            url: '/videos', className: 'play'
+        }
+    ],
+
     links: [
-        {title: 'Blog de Alejandro slayerfat Granadillo', url: '/blog', className: 'pencil'},
-        {title: 'Videos en youtube de Alejandro slayerfat Granadillo', url: '/videos', className: 'play'},
         {
             title: 'Alejandro slayerfat Granadillo en twitter @slayerfat',
             url: 'http://www.twitter.com/slayerfat',

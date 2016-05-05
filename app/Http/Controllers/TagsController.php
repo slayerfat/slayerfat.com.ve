@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests;
+use App\Http\Requests\TagRequest;
 use App\Tag;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 
 class TagsController extends Controller
 {
@@ -25,62 +25,37 @@ class TagsController extends Controller
      */
     public function index()
     {
-        return view('tags.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('tags.create');
+        return Tag::all();
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param TagRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TagRequest $request)
     {
-        return $request->all();
-    }
+        $tag = Tag::create($request->all());
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return $tag;
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  TagRequest $request
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TagRequest $request, $id)
     {
-        //
+        /** @var Tag $tag */
+        $tag       = Tag::findOrFail($id);
+        $tag->name = $request->input('name');
+        $tag->save();
+
+        return $tag;
     }
 
     /**
@@ -91,6 +66,11 @@ class TagsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tag = Tag::findOrFail($id);
+        if ($this->destroyPrototype($tag, 'delete') === true) {
+            return response()->json('ok');
+        }
+
+        return response()->json('Integrity Violation.');
     }
 }

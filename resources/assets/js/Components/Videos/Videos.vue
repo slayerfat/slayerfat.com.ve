@@ -1,4 +1,5 @@
 <template>
+    <navbar></navbar>
     <div class="row align-spaced" v-for="video in videos">
         <div class="small-9 columns">
             <div class="flex-video widescreen">
@@ -9,9 +10,12 @@
             </div>
         </div>
     </div>
+    <my-footer></my-footer>
 </template>
 
 <script>
+    import Navbar from "./../Navbar.vue";
+    import MyFooter from "./../Footer.vue";
     export default {
         data () {
             return {
@@ -29,10 +33,11 @@
                 });
                 this.videos = videos;
             });
+        },
+
+        components: {
+            Navbar,
+            MyFooter
         }
     };
 </script>
-
-<style>
-
-</style>

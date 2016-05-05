@@ -18,7 +18,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/videos/{id}', ['as' => 'videos.index', 'uses' => 'VideosController@show']);
     Route::get('/videos/uploads/latest', ['as' => 'videos.index', 'uses' => 'VideosController@latestUploads']);
 
-    Route::get('/etiquetas', ['as' => 'tags.index', 'uses' => 'TagsController@index']);
-    Route::get('/etiquetas/crear', ['as' => 'tags.create', 'uses' => 'TagsController@create']);
-    Route::post('/etiquetas', ['as' => 'tags.store', 'uses' => 'TagsController@store']);
+    Route::get('/tags', ['as' => 'tags.index', 'uses' => 'TagsController@index']);
+    Route::post('tags', ['as' => 'tags.store', 'uses' => 'TagsController@store']);
+    Route::put('tags/{id}', ['as' => 'tags.store', 'uses' => 'TagsController@update']);
+    Route::delete('tags/{id}', ['as' => 'tags.store', 'uses' => 'TagsController@destroy']);
 });
