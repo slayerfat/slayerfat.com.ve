@@ -19,4 +19,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/videos/uploads/latest', ['as' => 'videos.index', 'uses' => 'VideosController@latestUploads']);
 
     Route::get('/etiquetas', ['as' => 'tags.index', 'uses' => 'TagsController@index']);
+    Route::get('/etiquetas/crear', ['as' => 'tags.create', 'uses' => 'TagsController@create']);
+    Route::post('/etiquetas', ['as' => 'tags.store', 'uses' => 'TagsController@store']);
 });
