@@ -38,6 +38,13 @@ class User extends Authenticatable
     ];
 
     /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = ['admin' => 'bool'];
+
+    /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
