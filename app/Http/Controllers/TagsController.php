@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests;
+use App\Http\Requests\TagRequest;
 use App\Tag;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 
 class TagsController extends Controller
 {
@@ -25,7 +25,7 @@ class TagsController extends Controller
      */
     public function index()
     {
-        return view('tags.index');
+        return Tag::all();
     }
 
     /**
@@ -41,12 +41,14 @@ class TagsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param TagRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TagRequest $request)
     {
-        return $request->all();
+        $tag = Tag::create($request->all());
+
+        return $tag;
     }
 
     /**
