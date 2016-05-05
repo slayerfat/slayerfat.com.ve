@@ -9,5 +9,5 @@
 @endsection
 
 @section('content')
-  <greeter></greeter>
+  <router-view></router-view>
 @endsection

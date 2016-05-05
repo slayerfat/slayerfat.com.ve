@@ -2,9 +2,9 @@
     <div class="top-bar">
         <div class="top-bar-left">
             <ul class="dropdown menu" data-dropdown-menu>
-                <li><a href="/">slayerfat.com.ve</a></li>
-                <li v-for="link in links">
-                    <a :href="link.url" :title="link.title">
+                <li><a v-link="{path: '/'}">slayerfat.com.ve</a></li>
+                <li v-for="link in localLinks">
+                    <a v-link="link.url" :title="link.title">
                         <i :class="link.className | fontAwesomeClass"></i>
                     </a>
                 </li>
@@ -18,12 +18,8 @@
     export default {
         data () {
             return {
-                links: data.links
+                localLinks: data.localLinks
             };
-        },
-
-        created() {
-            this.links = [this.links[0], this.links[1]];
         }
     };
 </script>
