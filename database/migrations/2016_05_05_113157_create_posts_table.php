@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('title', 100);
             $table->string('slug');
-            $table->string('desc');
+            $table->string('summary');
             $table->text('body');
             $table->string('thumbnail_url');
             $table->dateTime('publish_date');

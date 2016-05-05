@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $user_id
  * @property string $title
  * @property string $slug
- * @property string $desc
+ * @property string $summary
  * @property string $body
  * @property string $publish_date
  * @property \Carbon\Carbon $created_at
@@ -25,7 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Post whereUserId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Post whereTitle($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Post whereSlug($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Post whereDesc($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Post whereSummary($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Post whereBody($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Post whereThumbnailUrl($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Post wherePublishDate($value)
@@ -44,7 +44,7 @@ class Post extends Model implements SluggableInterface
     protected $fillable = [
         'title',
         'slug',
-        'desc',
+        'summary',
         'body',
         'thumbnail_url',
         'publish_date',
