@@ -26,9 +26,22 @@
         </div>
 
         <div class="medium-8 medium-offset-2 columns">
-            <p v-for="tag in tags">
-                {{ tag.name }}
-            </p>
+            <dl v-for="tag in tags">
+                <dt @dblclick="startEdit(tag)" v-show="tag != editedTag">
+                    {{ tag.name }}
+                    <i class="fa fa-times float-right delete-tag" @click="remove(tag)"></i>
+                </dt>
+                <input class="edit"
+                       v-show="tag == editedTag"
+                       type="text" v-model="tag.name"
+                       @blur="doneEdit(tag)"
+                       @keyup.enter="doneEdit(tag)"
+                       @keyup.esc="cancelEdit(tag)"
+                >
+                <p class="help-text" v-if="updateInputErrors && (tag == editedTag || tag == deletedTag)">
+                    Acción Invalida. <span v-for="msg in errorMsg.name">{{ msg }}</span>
+                </p>
+            </dl>
         </div>
     </div>
     <my-footer></my-footer>
@@ -46,11 +59,23 @@
                 // flag that allows the error message to show.
                 createInputErrors: false,
 
+                // flag that allows the error message to show when updating.
+                updateInputErrors: false,
+
                 // the error message text.
                 errorMsg: '',
 
                 // the tags in the system.
                 tags: [],
+
+                // the last edited Tag.
+                editedTag: null,
+
+                // the last edited tag.
+                deletedTag: null,
+
+                // the cache where we store the name of the tag.
+                beforeEditCache: null,
 
                 // the name of a new tag.
                 name: '',
@@ -68,7 +93,7 @@
             this.resource.get().then(function (response) {
                 this.$set('tags', response.data)
             }, function () {
-                console.log('Error tags.')
+                this.$set('tags', [{name: 'Error inesperado en el servidor.'}])
             });
         },
 
@@ -80,8 +105,67 @@
                     this.name = '';
                 }, function (response) {
                     this.createInputErrors = true;
+
+                    // if the server returns a string, then probably is a html string 500 response.
+                    if (typeof response == "string") {
+                        return this.errorMsg = 'Error inesperado.';
+                    }
                     this.errorMsg = response.data;
                 });
+            },
+
+            startEdit(tag) {
+                this.beforeEditCache = tag.name;
+                this.editedTag = tag;
+            },
+
+            doneEdit(tag) {
+                tag.name = tag.name.trim();
+                if (!this.editedTag || !tag.name) {
+                    return;
+                }
+                this.editedTag = null;
+
+                this.resource.update({id: tag.id}, {name: tag.name}).then(function () {
+                    console.log('tag updated');
+                }, function (response) {
+                    this.editedTag = tag;
+                    this.createUpdateErrorMsg(response);
+                });
+            },
+
+            remove(tag) {
+                this.resource.delete({id: tag.id}).then(function () {
+                    this.deletedTag = null;
+                    this.tags.$remove(tag);
+                }, function (response) {
+                    // necessary for msg to show
+                    this.deletedTag = tag;
+                    this.createUpdateErrorMsg(response);
+                });
+            },
+
+            createUpdateErrorMsg(response) {
+                this.updateInputErrors = true;
+
+                // if the server returns a string, then probably is a html string 500 response.
+                if (typeof response == "string") {
+                    return this.errorMsg = 'Error inesperado.';
+                }
+                this.errorMsg = response.data;
+            },
+
+            cancelEdit(tag) {
+                this.editedTag = null;
+                tag.name = this.beforeEditCache;
+                this.beforeEditCache = null;
+
+                // check the tags and filter then to find the tag being edited.
+                this.tags.filter(function (element, index) {
+                    if (tag.id === element.id) {
+                        this.tags[index] = tag;
+                    }
+                }.bind(this));
             }
         },
 
@@ -91,3 +175,9 @@
         }
     };
 </script>
+
+<style>
+    .delete-tag {
+        color: #EC5840;
+    }
+</style>
