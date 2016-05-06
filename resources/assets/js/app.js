@@ -14,6 +14,7 @@ import Tags from './Components/Tags/Tags.vue';
 import Post from './Components/Posts/Post.vue';
 import PostCreate from './Components/Posts/Create.vue';
 import PostShow from './Components/Posts/Show.vue';
+import {getCurrentUser} from './getCurrentUser'
 
 Vue.filter('fontAwesomeClass', function (value) {
     return 'fa fa-' + value;
@@ -41,7 +42,8 @@ router.map({
     },
     '/etiquetas': {
         name: 'tags.index',
-        component: Tags
+        component: Tags,
+        auth: true
     },
     '/videos': {
         name: 'videos.index',
@@ -57,7 +59,37 @@ router.map({
     },
     'blog/crear': {
         name: 'posts.create',
-        component: PostCreate
+        component: PostCreate,
+        auth: true
+    }
+});
+
+if (router.counter !== 'undefined') {
+    router.counter = 0;
+}
+
+router.beforeEach(function (transition) {
+    let authenticated = false;
+
+    if (typeof router.user === 'object') {
+        authenticated = router.user.admin;
+    } else if (typeof router.user === 'undefined') {
+        getCurrentUser(Vue.http).then(function (user) {
+            router.user = user;
+        }, function() {console.log('user failed')});
+    } else if (router.counter <= 5) {
+        getCurrentUser(Vue.http).then(function (user) {
+            router.user = user;
+        }, function(user) {
+            router.user = user;
+        });
+    }
+
+    if (transition.to.auth && !authenticated) {
+        router.counter++;
+        transition.redirect('/');
+    } else {
+        transition.next();
     }
 });
 

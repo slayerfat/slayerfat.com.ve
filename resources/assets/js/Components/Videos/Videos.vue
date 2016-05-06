@@ -1,5 +1,5 @@
 <template>
-    <navbar></navbar>
+    <navbar :maintenace="maintenance"></navbar>
     <loader :loading="loader.loading"></loader>
     <div class="row align-spaced" v-for="video in videos">
         <div class="small-9 columns">
