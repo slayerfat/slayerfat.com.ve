@@ -63,6 +63,12 @@ class Post extends Model implements SluggableInterface
         'save_to'    => 'slug',
     ];
 
+    protected $hidden = [
+        'user_id',
+        'created_at',
+        'updated_at',
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|\Illuminate\Database\Query\Builder
      */
