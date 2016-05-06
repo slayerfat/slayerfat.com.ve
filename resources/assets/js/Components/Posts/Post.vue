@@ -26,7 +26,7 @@
                     </h4>
                     <p>{{ post.summary }}</p>
                     <p>
-                        <span class="secondary label" v-for="tag in post.tags">
+                        <span class="secondary label post-tags" v-for="tag in post.tags">
                             {{ tag.name }}
                         </span>
                     </p>
@@ -111,5 +111,9 @@
 
     .media-object-section img {
         width: 300px;
+    }
+
+    .post-tags {
+        margin-right: 10px;
     }
 </style>

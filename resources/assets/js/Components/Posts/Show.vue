@@ -2,7 +2,7 @@
     <navbar :maintenace="maintenance"></navbar>
     <loader :loading="loader.loading"></loader>
     <div class="row posts" v-if="post">
-        <div class="small-12 medium-9 column">
+        <div class="small-12 column">
             <artice>
                 <h1>{{ post.title }}</h1>
                 <h2 class="subheader">{{ post.summary }}</h2>
@@ -10,12 +10,12 @@
                 <hr>
                 <p>{{{ post.body }}}</p>
             </artice>
-        </div>
-        <div class="small-12 medium-3 column">
-            <p>Entradas relacionadas</p>
-            <dl>
-                <dt>Post</dt>
-            </dl>
+
+            <p>
+                <span class="secondary label post-tags" v-for="tag in post.tags">
+                    {{ tag.name }}
+                </span>
+            </p>
         </div>
     </div>
     <my-footer></my-footer>
@@ -60,5 +60,9 @@
 <style>
     .posts {
         margin-top: 1em;
+    }
+
+    .post-tags {
+        margin-right: 10px;
     }
 </style>
