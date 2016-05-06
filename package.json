@@ -15,6 +15,7 @@
     "jquery": "^2.2.3",
     "jquery-lazyload": "^1.9.7",
     "laravel-elixir-vueify": "^1.0.3",
+    "marked": "^0.3.5",
     "vue": "^1.0.21",
     "vue-resource": "^0.7.0",
     "vue-router": "^0.7.13"

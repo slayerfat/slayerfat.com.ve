@@ -109,5 +109,8 @@ return [
         'minimum'          => 'Mínimo',
         'hours'            => 'Horas',
         'date'             => 'Fecha',
+        'publish_date'     => 'Fecha de Publicación',
+        'summary'          => 'Sumario',
+        'thumbnail_url'    => 'Url de Imagen por defecto',
     ],
 ];

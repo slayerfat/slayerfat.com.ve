@@ -11,9 +11,17 @@ import Videos from './Components/Videos/Videos.vue';
 import Navbar from './Components/Navbar.vue';
 import Footer from './Components/Footer.vue';
 import Tags from './Components/Tags/Tags.vue';
+import Post from './Components/Posts/Post.vue';
+import PostCreate from './Components/Posts/Create.vue';
+import PostShow from './Components/Posts/Show.vue';
 
 Vue.filter('fontAwesomeClass', function (value) {
     return 'fa fa-' + value;
+});
+
+Vue.filter('markdown', function (value) {
+    var marked = require('marked');
+    return marked(value);
 });
 
 Vue.filter('arrayRandom', function (value) {
@@ -38,6 +46,18 @@ router.map({
     '/videos': {
         name: 'videos.index',
         component: Videos
+    },
+    '/blog': {
+        name: 'posts.index',
+        component: Post
+    },
+    'blog/:id': {
+        name: 'posts.show',
+        component: PostShow
+    },
+    'blog/crear': {
+        name: 'posts.create',
+        component: PostCreate
     }
 });
 

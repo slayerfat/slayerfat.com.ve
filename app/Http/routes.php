@@ -14,6 +14,10 @@ Route::group(['middleware' => 'web'], function () {
         return view('index', compact('background'));
     });
 
+    Route::get('/users/current', function () {
+        return Auth::user();
+    });
+
     Route::get('/videos', ['as' => 'videos.index', 'uses' => 'VideosController@index']);
     Route::get('/videos/{id}', ['as' => 'videos.index', 'uses' => 'VideosController@show']);
     Route::get('/videos/uploads/latest', ['as' => 'videos.index', 'uses' => 'VideosController@latestUploads']);
@@ -22,4 +26,9 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('tags', ['as' => 'tags.store', 'uses' => 'TagsController@store']);
     Route::put('tags/{id}', ['as' => 'tags.store', 'uses' => 'TagsController@update']);
     Route::delete('tags/{id}', ['as' => 'tags.store', 'uses' => 'TagsController@destroy']);
+
+    Route::get('/posts', ['as' => 'posts.index', 'uses' => 'PostsController@index']);
+    Route::post('posts', ['as' => 'posts.store', 'uses' => 'PostsController@store']);
+    Route::put('posts/{id}', ['as' => 'posts.store', 'uses' => 'PostsController@update']);
+    Route::delete('posts/{id}', ['as' => 'posts.store', 'uses' => 'PostsController@destroy']);
 });
