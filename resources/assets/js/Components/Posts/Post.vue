@@ -39,7 +39,7 @@
 <script>
     import Navbar from "./../Navbar.vue";
     import MyFooter from "./../Footer.vue";
-    import Loader from "./../Loader.vue"
+    import Loader from "./../Loader.vue";
     export default {
         data () {
             return {
