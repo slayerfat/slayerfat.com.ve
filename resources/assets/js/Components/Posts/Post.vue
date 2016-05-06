@@ -1,7 +1,7 @@
 <template>
     <navbar></navbar>
     <loader :loading="loader.loading"></loader>
-    <div class="row posts">
+    <div class="row posts" v-if="user">
         <div class="small-12 columns">
             <p>
                 <a class="button"
@@ -65,6 +65,8 @@
         created() {
             this.$http.get('users/current').then(function (response) {
                 this.$set('user', response.data);
+            }, function () {
+                this.$set('user', {});
             });
 
             // the {/id} is important.
