@@ -1,5 +1,6 @@
 <template>
     <navbar></navbar>
+    <loader :loading="loader.loading"></loader>
     <div class="row align-spaced" v-for="video in videos">
         <div class="small-9 columns">
             <div class="flex-video widescreen">
@@ -16,12 +17,15 @@
 <script>
     import Navbar from "./../Navbar.vue";
     import MyFooter from "./../Footer.vue";
+    import Loader from "./../Loader.vue";
     export default {
         data () {
             return {
-                videos: [],
+                loader: {
+                    loading: true
+                },
 
-                html: ''
+                videos: []
             };
         },
 
@@ -32,12 +36,14 @@
                     videos[index] = video;
                 });
                 this.videos = videos;
+                this.loader.loading = false;
             });
         },
 
         components: {
             Navbar,
-            MyFooter
+            MyFooter,
+            Loader
         }
     };
 </script>

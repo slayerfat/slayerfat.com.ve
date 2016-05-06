@@ -1,5 +1,6 @@
 <template>
     <navbar></navbar>
+    <loader :loading="loader.loading"></loader>
     <div class="row posts">
         <div class="small-12 columns">
             <p>
@@ -38,9 +39,13 @@
 <script>
     import Navbar from "./../Navbar.vue";
     import MyFooter from "./../Footer.vue";
+    import Loader from "./../Loader.vue"
     export default {
         data () {
             return {
+                loader: {
+                    loading: true
+                },
                 // the error message text.
                 errorMsg: '',
 
@@ -67,15 +72,17 @@
             this.resource = this.$resource('posts{/id}');
 
             this.resource.get().then(function (response) {
-                this.$set('posts', response.data)
+                this.$set('posts', response.data);
+                this.loader.loading = false;
             }, function () {
-                this.$set('posts', [{title: 'Error inesperado en el servidor.'}])
+                this.$set('posts', [{title: 'Error inesperado en el servidor.'}]);
             });
         },
 
         components: {
             Navbar,
-            MyFooter
+            MyFooter,
+            Loader
         }
     };
 </script>
