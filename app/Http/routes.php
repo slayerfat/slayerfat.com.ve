@@ -28,6 +28,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::delete('tags/{id}', ['as' => 'tags.store', 'uses' => 'TagsController@destroy']);
 
     Route::get('/posts', ['as' => 'posts.index', 'uses' => 'PostsController@index']);
+    Route::get('/posts/{id}', ['as' => 'posts.index', 'uses' => 'PostsController@show']);
     Route::post('posts', ['as' => 'posts.store', 'uses' => 'PostsController@store']);
     Route::put('posts/{id}', ['as' => 'posts.store', 'uses' => 'PostsController@update']);
     Route::delete('posts/{id}', ['as' => 'posts.store', 'uses' => 'PostsController@destroy']);

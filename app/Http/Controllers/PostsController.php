@@ -29,6 +29,15 @@ class PostsController extends Controller
     }
 
     /**
+     * @param $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        return Post::findOrFail($id);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param PostRequest $request
