@@ -1,11 +1,11 @@
 <template>
     <navbar></navbar>
     <loader :loading="loader.loading"></loader>
-    <div class="row posts" v-if="user">
+    <div class="row posts">
         <div class="small-12 columns">
             <p>
                 <a class="button"
-                   v-show="user.admin"
+                   v-if="isAdmin"
                    v-link="{name: 'posts.create'}"
                 >
                     Crear
@@ -40,6 +40,7 @@
     import Navbar from "./../Navbar.vue";
     import MyFooter from "./../Footer.vue";
     import Loader from "./../Loader.vue";
+    import {getCurrentUser} from "./../../getCurrentUser";
     export default {
         data () {
             return {
@@ -58,16 +59,29 @@
                 // the tag ajax http resource.
                 resource: null,
 
-                user: null
+                // the current user object
+                user: null,
+
+                // current user admin status
+                isAdmin: false
             };
         },
 
         created() {
-            this.$http.get('users/current').then(function (response) {
-                this.$set('user', response.data);
-            }, function () {
-                this.$set('user', {});
-            });
+            if (this.user === null) {
+                if (typeof this.$router.user === 'object') {
+                    this.$set('user', this.$router.user);
+                    this.$set('isAdmin', this.$router.user.admin);
+                } else {
+                    getCurrentUser(this.$http).then(function (user) {
+                        this.$router.user = user;
+                        this.$set('user', user);
+                        this.$set('isAdmin', user.admin);
+                    }.bind(this), function () {
+                        console.log('user failed')
+                    });
+                }
+            }
 
             // the {/id} is important.
             // https://github.com/vuejs/vue-resource/blob/master/docs/resource.md

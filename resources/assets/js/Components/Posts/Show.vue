@@ -1,5 +1,5 @@
 <template>
-    <navbar></navbar>
+    <navbar :maintenace="maintenance"></navbar>
     <loader :loading="loader.loading"></loader>
     <div class="row posts" v-if="post">
         <div class="small-12 medium-9 column">

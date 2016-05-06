@@ -1,6 +1,8 @@
 export default {
+    // greeter main heading
     name: 'Alejandro Granadillo Palau',
 
+    // stores currently selected descList item
     currentDesc: '',
 
     descList: [
@@ -18,6 +20,7 @@ export default {
         'Modelo, Vista, Controlador, Entidad, Relación, Metodología.'
     ],
 
+    // links existing in the vue-router
     localLinks: [
         {
             title: 'Blog de Alejandro slayerfat Granadillo',
@@ -30,6 +33,16 @@ export default {
         }
     ],
 
+    // links existing in the vue-router but only for admins
+    maintenanceLinks: [
+        {
+            title: 'Etiquetas',
+            url: '/etiquetas',
+            className: 'tags'
+        }
+    ],
+
+    // external links
     links: [
         {
             title: 'Alejandro slayerfat Granadillo en twitter @slayerfat',
