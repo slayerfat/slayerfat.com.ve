@@ -11,6 +11,7 @@
                     Crear
                 </a>
             </p>
+            <h4 v-if="posts.length == 0">No hay entradas disponibles</h4>
             <div class="media-object stack-for-small" v-for="post in posts">
                 <div class="media-object-section">
                     <a v-link="{name: 'posts.show', params: {id: post.id}}">
