@@ -1,20 +1,21 @@
 <template>
     <navbar></navbar>
-    <div class="row posts">
-        <div class="small-12 columns">
-            <form>
-                <label>Título
-                    <input type="text" name="title">
-                </label>
-
-                <label>Cuerpo
-                    <textarea name="body" rows="10"></textarea>
-                </label>
-
-                <button type="submit" class="button">
-                    <i class="fa fa-sign-in"></i> Entrar
-                </button>
-            </form>
+    <loader :loading="loader.loading"></loader>
+    <div class="row posts" v-if="post">
+        <div class="small-12 medium-9 column">
+            <artice>
+                <h1>{{ post.title }}</h1>
+                <h2 class="subheader">{{ post.summary }}</h2>
+                <h4>{{ post.dates.formal }}, {{ post.dates.formatted }}</h4>
+                <hr>
+                <p>{{{ post.body }}}</p>
+            </artice>
+        </div>
+        <div class="small-12 medium-3 column">
+            <p>Entradas relacionadas</p>
+            <dl>
+                <dt>Post</dt>
+            </dl>
         </div>
     </div>
     <my-footer></my-footer>
@@ -23,28 +24,35 @@
 <script>
     import Navbar from "./../Navbar.vue";
     import MyFooter from "./../Footer.vue";
+    import Loader from "./../Loader.vue";
     export default {
         data () {
-            return;
+            return {
+                loader: {
+                    loading: true
+                },
+                post: null,
+                user: null
+            };
         },
 
         created() {
+            this.$http.get('users/current').then(function (response) {
+                this.$set('user', response.data);
+            });
 
-        },
-
-        methods: {
-            store() {
-                this.$http.get().then(function (response) {
-                    this.$set('posts', response.data)
-                }, function () {
-                    this.$set('posts', [{title: 'Error inesperado en el servidor.'}])
-                });
-            }
+            this.$http.get('posts{/id}', {id: this.$route.params.id}).then(function (response) {
+                this.$set('post', response.data);
+                this.loader.loading = false;
+            }, function () {
+                this.$set('post', [{title: 'Error inesperado en el servidor.'}]);
+            });
         },
 
         components: {
             Navbar,
-            MyFooter
+            MyFooter,
+            Loader
         }
     };
 </script>

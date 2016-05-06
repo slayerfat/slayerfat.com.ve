@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Requests\PostRequest;
 use App\Post;
 use Auth;
+use Date;
 
 class PostsController extends Controller
 {
@@ -34,7 +35,16 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        return Post::findOrFail($id);
+        /** @var Post $post */
+        $post               = Post::findOrFail($id);
+        $dates              = [];
+        $date               = Date::parse($post->publish_date);
+        $dates['formatted'] = $date->diffForHumans();
+        $dates['formal']    = 'Caracas, ' . $date->format('l j F \d\e Y');
+
+        $post->dates = $dates;
+
+        return $post;
     }
 
     /**

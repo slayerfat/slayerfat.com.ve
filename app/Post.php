@@ -15,10 +15,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $slug
  * @property string $summary
  * @property string $body
- * @property string $publish_date
+ * @property string $thumbnail_url
+ * @property \Carbon\Carbon $publish_date
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property \Carbon\Carbon $thumbnail_url
  * @property-read \App\User $user
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Tag[] $tags
  * @method static \Illuminate\Database\Query\Builder|\App\Post whereId($value)
@@ -53,7 +53,7 @@ class Post extends Model implements SluggableInterface
     /**
      * @var array
      */
-    protected $dates = ['published_at'];
+    protected $dates = ['publish_date'];
 
     /**
      * @var array
