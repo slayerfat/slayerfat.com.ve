@@ -8,7 +8,7 @@
                 <h2 class="subheader">{{ post.summary }}</h2>
                 <h4>{{ post.dates.formal }}, {{ post.dates.formatted }}</h4>
                 <hr>
-                <p>{{{ post.body }}}</p>
+                <p>{{{ post.body | markdown }}}</p>
             </artice>
 
             <p>
