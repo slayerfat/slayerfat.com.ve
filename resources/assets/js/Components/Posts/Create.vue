@@ -64,6 +64,14 @@
                     </div>
                 </div>
 
+                <select v-model="selectedTags" multiple>
+                    <option v-for="tag in tags" :value="tag.id">{{ tag.name }}</option>
+                </select>
+
+                <p v-if="errors.tag_id" class="help-text" v-for="error in errors.tag_id">
+                    {{ error }}
+                </p>
+
                 <button type="submit" class="button expanded">Crear Entrada</button>
             </form>
         </div>
@@ -85,19 +93,26 @@
                     body: null,
                     summary: null,
                     thumbnail_url: null,
-                    publish_date: null
+                    publish_date: null,
+                    tag_id: null
                 },
 
                 title: '',
                 body: '',
                 summary: '',
                 thumbnail_url: '',
-                publish_date: ''
+                publish_date: '',
+                selectedTags: null,
+                tags: null
             };
         },
 
         created() {
-
+            this.$http.get('/tags').then(function(response) {
+                this.tags = response.data;
+            }, function() {
+                this.tags.push({name: 'Error, no se puede procesar tags.'});
+            });
         },
 
         methods: {
@@ -107,7 +122,8 @@
                     body: this.body,
                     summary: this.summary,
                     thumbnail_url: this.thumbnail_url,
-                    publish_date: this.publish_date
+                    publish_date: this.publish_date,
+                    tag_id: this.selectedTags
                 };
                 this.$http.post('/posts', post).then(function (response) {
                     this.$route.router.go('/blog', {id: response.data.id});

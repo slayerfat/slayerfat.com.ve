@@ -29,6 +29,7 @@ class PostRequest extends Request
             'summary'       => 'required|alpha_dash',
             'publish_date'  => 'required|date',
             'thumbnail_url' => 'required|url',
+            'tag_id'          => 'required|exists:tags,id',
         ];
     }
 }

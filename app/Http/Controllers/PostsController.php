@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Requests\PostRequest;
 use App\Post;
+use App\Tag;
 use Auth;
 use Date;
 
@@ -26,7 +27,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return Post::all();
+        return Post::all()->load('tags');
     }
 
     /**
@@ -36,7 +37,7 @@ class PostsController extends Controller
     public function show($id)
     {
         /** @var Post $post */
-        $post               = Post::findOrFail($id);
+        $post               = Post::findOrFail($id)->load('tags');
         $dates              = [];
         $date               = Date::parse($post->publish_date);
         $dates['formatted'] = $date->diffForHumans();
@@ -56,9 +57,12 @@ class PostsController extends Controller
      */
     public function store(PostRequest $request, Post $post)
     {
+        $tags = Tag::find($request->input('tag_id'));
         $post->fill($request->all());
         $post->user_id = Auth::id();
         $post->save();
+
+        $post->tags()->attach($tags);
 
         return $post;
     }
