@@ -149,8 +149,8 @@
                 this.updateInputErrors = true;
 
                 // if the server returns a string, then probably is a html string 500 response.
-                if (typeof response == "string") {
-                    return this.errorMsg = 'Error inesperado.';
+                if (response.status === 500) {
+                    return this.errorMsg = [{name: 'Error inesperado.'}];
                 }
                 this.errorMsg = response.data;
             },
