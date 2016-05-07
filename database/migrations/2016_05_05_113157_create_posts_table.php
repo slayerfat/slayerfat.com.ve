@@ -20,9 +20,9 @@ class CreatePostsTable extends Migration
             $table->string('slug');
             $table->string('summary');
             $table->text('body_one');
-            $table->text('body_two');
-            $table->text('body_three');
-            $table->text('body_four');
+            $table->text('body_two')->nullable();
+            $table->text('body_three')->nullable();
+            $table->text('body_four')->nullable();
             $table->json('thumbnails');
             $table->dateTime('publish_date');
             $table->timestamps();
