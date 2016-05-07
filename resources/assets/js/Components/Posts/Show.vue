@@ -149,9 +149,12 @@
             </div>
 
             <p>
-                <span class="secondary label post-tags" v-for="tag in post.tags">
+                <a class="secondary label post-tags"
+                   v-for="tag in post.tags"
+                   v-link="{name: 'posts.index', query:{tagId: tag.id}}"
+                >
                     {{ tag.name }}
-                </span>
+                </a>
             </p>
         </div>
     </div>

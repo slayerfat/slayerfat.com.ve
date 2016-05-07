@@ -11,6 +11,15 @@
                     Crear
                 </a>
             </p>
+            <p>
+                <a class="button"
+                   v-if="filtered"
+                   href="#"
+                   @click.prevent="resetFiltered"
+                >
+                    Ver todos
+                </a>
+            </p>
             <h4 v-if="posts.length == 0">No hay entradas disponibles</h4>
             <div class="media-object stack-for-small" v-for="post in posts">
                 <div class="media-object-section">
@@ -26,7 +35,10 @@
                     </h4>
                     <p>{{ post.summary }}</p>
                     <p>
-                        <span class="secondary label post-tags" v-for="tag in post.tags">
+                        <span class="secondary label post-tags"
+                              v-for="tag in post.tags"
+                              @click="filterByTag(tag)"
+                        >
                             {{ tag.name }}
                         </span>
                     </p>
@@ -51,8 +63,14 @@
                 // the error message text.
                 errorMsg: '',
 
-                // the tags in the system.
+                // the posts in the system.
                 posts: [],
+
+                // current posts
+                currentPosts: [],
+
+                // flags if the current list is filtered or not.
+                filtered: false,
 
                 // the last edited tag.
                 deleted: null,
@@ -84,10 +102,37 @@
 
             this.resource.get().then(function (response) {
                 this.$set('posts', response.data);
+                this.$set('currentPosts', response.data);
                 this.loader.loading = false;
             }, function () {
                 this.$set('posts', [{title: 'Error inesperado en el servidor.'}]);
             });
+
+            // if there is a tag in the params, then we must filter by it.
+            if (this.$route.query.tagId) {
+                this.filterByTag({id: this.$route.query.tagId});
+            }
+        },
+
+        methods: {
+            filterByTag(tag) {
+                this.$http.get('tags{/id}/posts', {id: tag.id}).then(function (response) {
+                    this.loader.loading = true;
+                    this.filtered = true;
+                    this.$set('posts', response.data);
+                    this.$set('currentPosts', response.data);
+                    this.loader.loading = false;
+                }, function () {
+                    console.log('error tag posts');
+                });
+            },
+
+            resetFiltered() {
+                this.loader.loading = true;
+                this.$set('posts', this.currentPosts);
+                this.filtered = false;
+                this.loader.loading = false;
+            }
         },
 
         components: {

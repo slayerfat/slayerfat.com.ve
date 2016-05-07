@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Requests\TagRequest;
 use App\Tag;
-use Illuminate\Http\Request;
 
 class TagsController extends Controller
 {
@@ -15,7 +14,7 @@ class TagsController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('admin');
+        $this->middleware('admin')->except(['posts']);
     }
 
     /**
@@ -72,5 +71,16 @@ class TagsController extends Controller
         }
 
         return response()->json('Integrity Violation.');
+    }
+
+    /**
+     * returns the related tag posts.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function posts($id)
+    {
+        return Tag::findOrFail($id)->load('posts', 'posts.tags')->posts;
     }
 }
