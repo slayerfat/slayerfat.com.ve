@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Requests\PostRequest;
+use App\Http\Requests\PostUpdateRequest;
 use App\Post;
 use App\Tag;
 use Auth;
@@ -37,15 +38,26 @@ class PostsController extends Controller
     public function show($id)
     {
         /** @var Post $post */
-        $post               = Post::findOrFail($id)->load('tags');
+        $post  = Post::findOrFail($id)->load('tags');
+        $dates = $this->makePostDates($post);
+
+        $post->dates = $dates;
+
+        return $post;
+    }
+
+    /**
+     * @param $post
+     * @return array
+     */
+    private function makePostDates($post)
+    {
         $dates              = [];
         $date               = Date::parse($post->publish_date);
         $dates['formatted'] = $date->diffForHumans();
         $dates['formal']    = 'Caracas, ' . $date->format('l j F \d\e Y');
 
-        $post->dates = $dates;
-
-        return $post;
+        return $dates;
     }
 
     /**
@@ -70,11 +82,11 @@ class PostsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  PostRequest $request
+     * @param  PostUpdateRequest $request
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PostRequest $request, $id)
+    public function update(PostUpdateRequest $request, $id)
     {
         /** @var Post $post */
         $post = Post::findOrFail($id);

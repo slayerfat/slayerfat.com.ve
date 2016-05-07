@@ -9,6 +9,9 @@ var paths = {
     'lazyLoad': './node_modules/jquery-lazyload/jquery.lazyload.js'
 };
 
+// .vue components hot reload
+elixir.config.js.browserify.plugins.push({name: "browserify-hmr", options: {}});
+
 elixir(function (mix) {
     mix.sass('app.scss')
         .copy(paths.fontAwesome + 'fonts/**', paths.public + '/fonts')
@@ -21,15 +24,6 @@ elixir(function (mix) {
         ])
         .browserify('app.js')
         .browserSync({
-            files: [
-                config.appPath + '/**/*.php',
-                config.get('public.css.outputFolder') + '/**/*.css',
-                config.get('public.js.outputFolder') + '/**/*.js',
-                config.get('public.versioning.buildFolder') + '/rev-manifest.json',
-                paths.public + '/**/*.vue',
-                paths.public + '/**/*.js',
-                config.viewPath + '/**/*.php'
-            ],
             proxy: 'slayerfat.app'
         });
 });
