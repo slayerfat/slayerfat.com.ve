@@ -21,7 +21,7 @@
 
 <script>
     import data from "./data/greeterData";
-    import {getCurrentUser} from "./../getCurrentUser";
+    import {makeComponentsUser} from "./../makeComponentsUser";
     export default {
         data () {
             return {
@@ -38,18 +38,14 @@
         },
 
         created() {
-            if  (this.user === null) {
-                if (typeof this.$router.user === 'object') {
-                    this.$set('user', this.$router.user);
-                    this.$set('isAdmin', this.$router.user.admin);
-                } else {
-                    getCurrentUser(this.$http).then(function(user) {
-                        this.$router.user = user;
-                        this.$set('user', user);
-                        this.$set('isAdmin', user.admin);
-                    }.bind(this), function() {console.log('user failed')});
+            makeComponentsUser(this).then(function (user) {
+                this.$set('user', user);
+                if (user.admin) {
+                    this.$set('isAdmin', user.admin);
                 }
-            }
+            }.bind(this), function (user) {
+                this.$set('user', user);
+            }.bind(this));
         }
     };
 </script>
