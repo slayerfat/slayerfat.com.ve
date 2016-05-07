@@ -13,12 +13,15 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Post::class, function (Faker\Generator $faker) {
     return [
-        'user_id'       => 1,
-        'title'         => $faker->word,
-        'summary'       => $faker->sentence,
-        'body'          => $faker->paragraphs(5, true),
-        'thumbnail_url' => 'http://i.imgur.com/i0YU4Zt.gif',
-        'publish_date'  => Carbon\Carbon::now(),
+        'user_id'      => 1,
+        'title'        => $faker->word,
+        'summary'      => $faker->sentence,
+        'body_one'     => $faker->paragraphs(5, true),
+        'body_two'     => $faker->paragraphs(5, true),
+        'body_three'   => $faker->paragraphs(5, true),
+        'body_four'    => $faker->paragraphs(5, true),
+        'thumbnails'   => ['http://i.imgur.com/i0YU4Zt.gif', 'http://i.imgur.com/Cbo4G.png'],
+        'publish_date' => Carbon\Carbon::now(),
     ];
 });
 

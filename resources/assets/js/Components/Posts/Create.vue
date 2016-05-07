@@ -13,24 +13,6 @@
                     {{ error }}
                 </p>
 
-                <label>Cuerpo
-                    <textarea v-model="body" rows="6"></textarea>
-                </label>
-
-                <p v-if="errors.body" class="help-text" v-for="error in errors.body">
-                    {{ error }}
-                </p>
-
-                <label>
-                    <button type="button"
-                            class="button expanded secondary"
-                            @click="showPreview = !showPreview"
-                    >
-                        Preview
-                    </button>
-                    <div v-show="showPreview">{{{ body | markdown }}}</div>
-                </label>
-
                 <label>Sumario
                     <textarea v-model="summary" rows="2"></textarea>
                 </label>
@@ -39,14 +21,94 @@
                     {{ error }}
                 </p>
 
+                <div>
+                    <label>Cuerpo uno
+                        <textarea v-model="body_one" rows="6"></textarea>
+                    </label>
+
+                    <p v-if="errors.body_one" class="help-text" v-for="error in errors.body_one">
+                        {{ error }}
+                    </p>
+
+                    <label>
+                        <button type="button"
+                                class="button expanded secondary"
+                                @click="showPreview.one = !showPreview.one"
+                        >
+                            Preview
+                        </button>
+                        <div v-show="showPreview.one">{{{ body_one | markdown }}}</div>
+                    </label>
+                </div>
+
+                <div>
+                    <label>Cuerpo dos
+                        <textarea v-model="body_two" rows="6"></textarea>
+                    </label>
+
+                    <p v-if="errors.body_two" class="help-text" v-for="error in errors.body_two">
+                        {{ error }}
+                    </p>
+
+                    <label>
+                        <button type="button"
+                                class="button expanded secondary"
+                                @click="showPreview.two = !showPreview.two"
+                        >
+                            Preview
+                        </button>
+                        <div v-show="showPreview.two">{{{ body_two | markdown }}}</div>
+                    </label>
+                </div>
+
+                <div>
+                    <label>Cuerpo tres
+                        <textarea v-model="body_three" rows="6"></textarea>
+                    </label>
+
+                    <p v-if="errors.body_three" class="help-text" v-for="error in errors.body_three">
+                        {{ error }}
+                    </p>
+
+                    <label>
+                        <button type="button"
+                                class="button expanded secondary"
+                                @click="showPreview.three = !showPreview.three"
+                        >
+                            Preview
+                        </button>
+                        <div v-show="showPreview.three">{{{ body_three | markdown }}}</div>
+                    </label>
+                </div>
+
+                <div>
+                    <label>Cuerpo cuatro
+                        <textarea v-model="body_four" rows="6"></textarea>
+                    </label>
+
+                    <p v-if="errors.body_four" class="help-text" v-for="error in errors.body_four">
+                        {{ error }}
+                    </p>
+
+                    <label>
+                        <button type="button"
+                                class="button expanded secondary"
+                                @click="showPreview.four = !showPreview.four"
+                        >
+                            Preview
+                        </button>
+                        <div v-show="showPreview.four">{{{ body_four | markdown }}}</div>
+                    </label>
+                </div>
+
                 <div class="row">
                     <div class="medium-6 columns">
-                        <label>Imagen por defecto
-                            <input type="text" v-model="thumbnail_url">
+                        <label>Imágenes por defecto
+                            <input type="text" v-model="thumbnails" placeholder="Enlaces URL separadas por coma">
                         </label>
-                        <p v-if="errors.thumbnail_url"
+                        <p v-if="errors.thumbnails"
                            class="help-text"
-                           v-for="error in errors.thumbnail_url"
+                           v-for="error in errors.thumbnails"
                         >
                             {{ error }}
                         </p>
@@ -86,31 +148,52 @@
         data () {
             return {
                 // allows showing the markdown render
-                showPreview: false,
+                showPreview: {
+                    one: false,
+                    two: false,
+                    three: false,
+                    four: false
+                },
 
                 errors: {
                     title: null,
-                    body: null,
+                    body_one: null,
+                    body_two: null,
+                    body_three: null,
+                    body_four: null,
                     summary: null,
-                    thumbnail_url: null,
+                    thumbnails: null,
                     publish_date: null,
                     tag_id: null
                 },
 
                 title: '',
-                body: '',
+                body_one: '',
+                body_two: '',
+                body_three: '',
+                body_four: '',
                 summary: '',
-                thumbnail_url: '',
+                thumbnails: '',
                 publish_date: '',
                 selectedTags: null,
                 tags: null
             };
         },
 
+        computed: {
+            thumbnailsArray() {
+                let array = this.thumbnails.split(',');
+                array.forEach(function (element, index, data) {
+                    data[index] = element.trim();
+                });
+                return array;
+            }
+        },
+
         created() {
-            this.$http.get('/tags').then(function(response) {
+            this.$http.get('/tags').then(function (response) {
                 this.tags = response.data;
-            }, function() {
+            }, function () {
                 this.tags.push({name: 'Error, no se puede procesar tags.'});
             });
         },
@@ -119,9 +202,12 @@
             store() {
                 let post = {
                     title: this.title,
-                    body: this.body,
+                    body_one: this.body_one,
+                    body_two: this.body_two,
+                    body_three: this.body_three,
+                    body_four: this.body_four,
                     summary: this.summary,
-                    thumbnail_url: this.thumbnail_url,
+                    thumbnails: this.thumbnailsArray,
                     publish_date: this.publish_date,
                     tag_id: this.selectedTags
                 };

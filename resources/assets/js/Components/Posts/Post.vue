@@ -15,7 +15,7 @@
             <div class="media-object stack-for-small" v-for="post in posts">
                 <div class="media-object-section">
                     <a v-link="{name: 'posts.show', params: {id: post.id}}">
-                        <img :src="post.thumbnail_url">
+                        <img :src="post.thumbnails | arrayRandom">
                     </a>
                 </div>
                 <div class="media-object-section main-section">

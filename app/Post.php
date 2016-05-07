@@ -14,8 +14,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $title
  * @property string $slug
  * @property string $summary
- * @property string $body
- * @property string $thumbnail_url
+ * @property string $body_one
+ * @property string $body_two
+ * @property string $body_three
+ * @property string $body_four
+ * @property string $thumbnails
  * @property \Carbon\Carbon $publish_date
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
@@ -26,8 +29,11 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Post whereTitle($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Post whereSlug($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Post whereSummary($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Post whereBody($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Post whereThumbnailUrl($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Post whereBodyOne($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Post whereBodyTwo($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Post whereBodyThree($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Post whereBodyFour($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Post whereThumbnails($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Post wherePublishDate($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Post whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Post whereUpdatedAt($value)
@@ -45,8 +51,11 @@ class Post extends Model implements SluggableInterface
         'title',
         'slug',
         'summary',
-        'body',
-        'thumbnail_url',
+        'body_one',
+        'body_two',
+        'body_three',
+        'body_four',
+        'thumbnails',
         'publish_date',
     ];
 
@@ -67,6 +76,15 @@ class Post extends Model implements SluggableInterface
         'user_id',
         'created_at',
         'updated_at',
+    ];
+
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'thumbnails' => 'array',
     ];
 
     /**

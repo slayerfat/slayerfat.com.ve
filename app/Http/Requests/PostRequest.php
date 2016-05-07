@@ -24,12 +24,15 @@ class PostRequest extends Request
     public function rules()
     {
         return [
-            'title'         => 'required|between:5,255|alpha_dash',
-            'body'          => 'required',
-            'summary'       => 'required|alpha_dash',
-            'publish_date'  => 'required|date',
-            'thumbnail_url' => 'required|url',
-            'tag_id'          => 'required|exists:tags,id',
+            'title'        => 'required|between:5,255|alpha_dash',
+            'body_one'     => 'required',
+            'body_two'     => 'required_with:body_one',
+            'body_three'   => 'required_with_all:body_one,body_two',
+            'body_four'    => 'required_with_all:body_one,body_two,body_three',
+            'summary'      => 'required|alpha_dash',
+            'publish_date' => 'required|date',
+            'thumbnails'   => 'required',
+            'tag_id'       => 'required|exists:tags,id',
         ];
     }
 }
