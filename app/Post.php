@@ -72,6 +72,11 @@ class Post extends Model implements SluggableInterface
         'save_to'    => 'slug',
     ];
 
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
     protected $hidden = [
         'user_id',
         'created_at',
