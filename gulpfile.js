@@ -10,20 +10,25 @@ var paths = {
 };
 
 // .vue components hot reload
-elixir.config.js.browserify.plugins.push({name: "browserify-hmr", options: {}});
+if (elixir.config.production != true) {
+    elixir.config.js.browserify.plugins.push({
+        name: "browserify-hmr",
+        options: {}
+    });
+}
 
 elixir(function (mix) {
-    mix.sass('app.scss')
-        .copy(paths.fontAwesome + 'fonts/**', paths.public + '/fonts')
-        .copy(paths.fontAwesome + 'fonts/**', paths.public + '/build/fonts')
-        .copy(paths.animateCss, paths.public + '/css/animate.min.css')
-        .copy(paths.lazyLoad, paths.public + '/js/jquery.lazyload.js')
-        .copy(paths.jquery, paths.public + '/js/jquery.js')
-        .version([
-            'css/app.css'
-        ])
-        .browserify('app.js')
-        .browserSync({
+    mix.sass('app.scss');
+    mix.copy(paths.fontAwesome + 'fonts/**', paths.public + '/fonts');
+    mix.copy(paths.fontAwesome + 'fonts/**', paths.public + '/build/fonts');
+    mix.copy(paths.animateCss, paths.public + '/css/animate.min.css');
+    mix.copy(paths.lazyLoad, paths.public + '/js/jquery.lazyload.js');
+    mix.copy(paths.jquery, paths.public + '/js/jquery.js');
+    mix.version(['css/app.css']);
+    mix.browserify('app.js');
+    if (elixir.config.production != true) {
+        mix.browserSync({
             proxy: 'slayerfat.app'
         });
+    }
 });
