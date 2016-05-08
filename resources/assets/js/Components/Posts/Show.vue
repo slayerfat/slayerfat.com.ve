@@ -67,7 +67,6 @@
                        v-if="editing == 'body_one'"
                        type="text" v-model="post.body_one"
                        @blur="doneEditing('body_one')"
-                       @keyup.enter="doneEditing('body_one')"
                        @keyup.esc="cancelEdit('body_one')"
                 ></textarea>
 
@@ -89,7 +88,6 @@
                           v-if="editing == 'body_two'"
                           type="text" v-model="post.body_two"
                           @blur="doneEditing('body_two')"
-                          @keyup.enter="doneEditing('body_two')"
                           @keyup.esc="cancelEdit('body_two')"
                 ></textarea>
 
@@ -111,7 +109,6 @@
                           v-if="editing == 'body_three'"
                           type="text" v-model="post.body_three"
                           @blur="doneEditing('body_three')"
-                          @keyup.enter="doneEditing('body_three')"
                           @keyup.esc="cancelEdit('body_three')"
                 ></textarea>
 
@@ -133,7 +130,6 @@
                           v-if="editing == 'body_four'"
                           type="text" v-model="post.body_four"
                           @blur="doneEditing('body_four')"
-                          @keyup.enter="doneEditing('body_four')"
                           @keyup.esc="cancelEdit('body_four')"
                 ></textarea>
 
