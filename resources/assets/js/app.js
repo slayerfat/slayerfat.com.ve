@@ -7,6 +7,7 @@ var VueRouter = require('vue-router');
 Vue.use(VueRouter);
 
 import Greeter from './Components/Greeter.vue';
+import Knowledge from './Components/Knowledge/Knowledge.vue';
 import Videos from './Components/Videos/Videos.vue';
 import Navbar from './Components/Navbar.vue';
 import Footer from './Components/Footer.vue';
@@ -47,6 +48,10 @@ router.map({
     '/': {
         name: '/',
         component: Greeter
+    },
+    '/conocimientos': {
+        name: 'knowledge',
+        component: Knowledge
     },
     '/etiquetas': {
         name: 'tags.index',

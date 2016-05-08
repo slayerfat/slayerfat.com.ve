@@ -30,6 +30,10 @@ export default {
         {
             title: 'Videos en youtube de Alejandro slayerfat Granadillo',
             url: '/videos', className: 'play'
+        },
+        {
+            title: 'Conocimientos de Alejandro slayerfat Granadillo',
+            url: '/conocimientos', className: 'book'
         }
     ],
 
@@ -53,11 +57,6 @@ export default {
             title: 'Alejandro slayerfat Granadillo en Facebook',
             url: 'http://www.facebook.com/slayerfat',
             className: 'facebook'
-        },
-        {
-            title: 'Alejandro slayerfat Granadillo en google plus',
-            url: 'https://plus.google.com/112944288001461665013',
-            className: 'google-plus'
         },
         {
             title: 'Perfil en Github de Alejandro slayerfat Granadillo',
