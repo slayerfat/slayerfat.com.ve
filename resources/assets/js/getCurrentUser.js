@@ -1,3 +1,9 @@
+/**
+ * Returns the current user or generic.
+ *
+ * @param http
+ * @returns {Promise}
+ */
 export function getCurrentUser(http) {
     let user = {admin: false};
 

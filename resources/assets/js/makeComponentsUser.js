@@ -1,4 +1,11 @@
 import {getCurrentUser} from "./getCurrentUser";
+
+/**
+ * Makes an user object for a vue component.
+ *
+ * @param $vm
+ * @returns {Promise}
+ */
 export function makeComponentsUser($vm) {
     // http://www.html5rocks.com/en/tutorials/es6/promises/
     return new Promise(function (resolve, reject) {
