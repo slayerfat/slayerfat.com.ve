@@ -22,9 +22,9 @@
                     </p>
 
                     <!--summary-->
-                    <h3 @dblclick="startEditing('summary')" v-show="editing != 'summary'">
+                    <h2 @dblclick="startEditing('summary')" v-show="editing != 'summary'">
                         {{ post.summary }}
-                    </h3>
+                    </h2>
                     <input class="edit"
                            v-if="editing == 'summary'"
                            type="text" v-model="post.summary"
@@ -38,9 +38,9 @@
                     </p>
 
                     <!--dates-->
-                    <h6 @dblclick="startEditing('publish_date')" v-show="editing != 'publish_date'">
+                    <h3 @dblclick="startEditing('publish_date')" v-show="editing != 'publish_date'">
                         <em>{{ post.dates.formal }}, {{ post.dates.formatted }}</em>
-                    </h6>
+                    </h3>
                     <input class="edit"
                            v-if="editing == 'publish_date'"
                            type="text" v-model="post.publish_date"
@@ -281,65 +281,3 @@
         }
     };
 </script>
-
-<style>
-    .post-header {
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-size: cover;
-        background-color: #464646;
-        width: 100%;
-        min-height: 40%;
-        position: relative;
-        display: table;
-        color: white;
-        text-shadow: 0 0 10px black;
-    }
-
-    .post-header-title {
-        background-color: rgba(10, 10, 10, 0.3);
-        display: table-cell;
-        vertical-align: middle;
-    }
-
-    .post-header-title h1 {
-        font-size: 4em;
-        padding-bottom: 0.5em;
-        font-family: "Source serif Pro", serif;
-    }
-
-    .post-header-title h3 {
-        font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-        font-size: 2em;
-    }
-
-    .post-header-title h6 {
-        font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-        font-size: 1.2em;
-    }
-
-    .post-body {
-        font-family: "Source serif Pro", serif;
-        text-align: justify;
-        font-size: 1.4em;
-        padding-bottom: 0.5em;
-    }
-
-    .post-tags {
-        margin-right: 10px;
-    }
-
-    .help-text {
-        color: white;
-    }
-
-    .markdown-preview {
-        background-color: #dadada;
-    }
-
-    .hljs {
-        margin-top: 0.5em;
-        margin-bottom: 0.5em;
-    }
-</style>

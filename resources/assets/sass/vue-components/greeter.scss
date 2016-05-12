@@ -1,0 +1,49 @@
+.greeter {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #464646;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: table;
+  text-align: center;
+  color: white;
+  text-shadow: 0 0 10px black;
+}
+
+.greeter-contents {
+  background-color: rgba(10, 10, 10, 0.3);
+  display: table-cell;
+  vertical-align: middle;
+
+  a {
+    color: white;
+  }
+
+  a:hover {
+    color: #dddddd;
+  }
+}
+
+.greeter-name {
+  font-family: "Oswald", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  text-transform: uppercase;
+}
+
+@media screen and (min-width: 50em) {
+  .greeter-name {
+    font-size: 4em;
+  }
+}
+
+@media screen and (min-width: 65em) {
+  .greeter-name {
+    font-size: 5em;
+  }
+}
+
+.greeter-desc {
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+}

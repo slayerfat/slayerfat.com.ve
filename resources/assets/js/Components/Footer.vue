@@ -47,20 +47,3 @@
         }
     };
 </script>
-
-<style>
-    .footer-center {
-        background: linear-gradient(#f9f9f9, white);
-        border-top: 1px solid #f2f2f2;
-        margin-top: 1em;
-        padding: 50px;
-        width: 100%;
-        text-align: center;
-    }
-
-    .footer-authors {
-        letter-spacing: 2px;
-        margin: 2em 0;
-        font-family: Consolas, Menlo, Monaco, monospace;
-    }
-</style>

@@ -175,9 +175,3 @@
         }
     };
 </script>
-
-<style>
-    .delete-tag {
-        color: #EC5840;
-    }
-</style>
