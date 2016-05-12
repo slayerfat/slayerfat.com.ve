@@ -14,7 +14,7 @@ class PostsController extends Controller
 {
 
     /**
-     * TagsController constructor.
+     * PostsController constructor.
      */
     public function __construct()
     {
@@ -28,25 +28,15 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return Post::all()->load('tags');
+        return Post::all()->load('tags')->each(function ($post) {
+            $post->dates = $this->makePostDates($post);
+        });
     }
 
     /**
-     * @param string $slug
-     * @return \Illuminate\Http\Response
-     */
-    public function show($slug)
-    {
-        /** @var Post $post */
-        $post  = Post::findBySlugOrIdOrFail($slug)->load('tags');
-        $dates = $this->makePostDates($post);
-
-        $post->dates = $dates;
-
-        return $post;
-    }
-
-    /**
+     * Creates various date elements for the views.
+     *
+     * @internal factor it out to the model.
      * @param $post
      * @return array
      */
@@ -58,6 +48,21 @@ class PostsController extends Controller
         $dates['formal']    = 'Caracas, ' . $date->format('l j F \d\e Y');
 
         return $dates;
+    }
+
+    /**
+     * Displays a post.
+     *
+     * @param string $slug
+     * @return \Illuminate\Http\Response
+     */
+    public function show($slug)
+    {
+        /** @var Post $post */
+        $post        = Post::findBySlugOrIdOrFail($slug)->load('tags');
+        $post->dates = $this->makePostDates($post);
+
+        return $post;
     }
 
     /**

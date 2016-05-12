@@ -35,6 +35,9 @@
                     </h4>
                     <p class="post-summary">{{ post.summary }}</p>
                     <p>
+                        <small>{{ post.dates.formatted }}.</small>
+                    </p>
+                    <p>
                         <span class="secondary label post-tags"
                               v-for="tag in post.tags"
                               @click="filterByTag(tag)"
