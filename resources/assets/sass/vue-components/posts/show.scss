@@ -16,22 +16,22 @@
   background-color: rgba(10, 10, 10, 0.3);
   display: table-cell;
   vertical-align: middle;
-}
 
-.post-header-title h1 {
-  font-size: 4em;
-  padding-bottom: 0.5em;
-  font-family: "Source serif Pro", serif;
-}
+  h1 {
+    font-size: 4em;
+    padding-bottom: 0.5em;
+    font-family: "Source serif Pro", serif;
+  }
 
-.post-header-title h3 {
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-  font-size: 2em;
-}
+  h2 {
+    font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    font-size: 2em;
+  }
 
-.post-header-title h6 {
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-  font-size: 1.2em;
+  h3 {
+    font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    font-size: 1.2em;
+  }
 }
 
 .post-body {
@@ -43,6 +43,10 @@
   .hljs {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
   }
 }
 

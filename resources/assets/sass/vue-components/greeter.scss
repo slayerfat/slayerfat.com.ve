@@ -17,6 +17,14 @@
   background-color: rgba(10, 10, 10, 0.3);
   display: table-cell;
   vertical-align: middle;
+
+  a {
+    color: white;
+  }
+
+  a:hover {
+    color: #dddddd;
+  }
 }
 
 .greeter-name {
@@ -38,12 +46,4 @@
 
 .greeter-desc {
   font-family: "Montserrat", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-}
-
-.greeter-contents a {
-  color: white;
-}
-
-.greeter a:hover {
-  color: #dddddd;
 }

@@ -22,9 +22,9 @@
                     </p>
 
                     <!--summary-->
-                    <h3 @dblclick="startEditing('summary')" v-show="editing != 'summary'">
+                    <h2 @dblclick="startEditing('summary')" v-show="editing != 'summary'">
                         {{ post.summary }}
-                    </h3>
+                    </h2>
                     <input class="edit"
                            v-if="editing == 'summary'"
                            type="text" v-model="post.summary"
@@ -38,9 +38,9 @@
                     </p>
 
                     <!--dates-->
-                    <h6 @dblclick="startEditing('publish_date')" v-show="editing != 'publish_date'">
+                    <h3 @dblclick="startEditing('publish_date')" v-show="editing != 'publish_date'">
                         <em>{{ post.dates.formal }}, {{ post.dates.formatted }}</em>
-                    </h6>
+                    </h3>
                     <input class="edit"
                            v-if="editing == 'publish_date'"
                            type="text" v-model="post.publish_date"
