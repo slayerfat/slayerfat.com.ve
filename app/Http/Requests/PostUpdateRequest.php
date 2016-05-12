@@ -24,8 +24,8 @@ class PostUpdateRequest extends Request
     public function rules()
     {
         return [
-            'title'        => 'between:5,255|alpha_dash',
-            'summary'      => 'alpha_dash|min:5',
+            'title'        => 'between:5,255|string',
+            'summary'      => 'string|min:5',
             'publish_date' => 'date',
             'tag_id'       => 'exists:tags,id',
         ];

@@ -24,12 +24,12 @@ class PostRequest extends Request
     public function rules()
     {
         return [
-            'title'        => 'required|between:5,255|alpha_dash',
+            'title'        => 'required|between:5,255|string',
             'body_one'     => 'required',
             'body_two'     => 'required_with:body_one',
             'body_three'   => 'required_with_all:body_one,body_two',
             'body_four'    => 'required_with_all:body_one,body_two,body_three',
-            'summary'      => 'required|alpha_dash|min:5',
+            'summary'      => 'required|string|min:5',
             'publish_date' => 'required|date',
             'thumbnails'   => 'required',
             'tag_id'       => 'required|exists:tags,id',
