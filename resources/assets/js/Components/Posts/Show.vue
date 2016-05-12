@@ -39,7 +39,7 @@
 
                     <!--dates-->
                     <h6 @dblclick="startEditing('publish_date')" v-show="editing != 'publish_date'">
-                        {{ post.dates.formal }}, {{ post.dates.formatted }}
+                        <em>{{ post.dates.formal }}, {{ post.dates.formatted }}</em>
                     </h6>
                     <input class="edit"
                            v-if="editing == 'publish_date'"
@@ -290,7 +290,7 @@
         background-size: cover;
         background-color: #464646;
         width: 100%;
-        height: 40%;
+        min-height: 40%;
         position: relative;
         display: table;
         color: white;
@@ -301,15 +301,29 @@
         background-color: rgba(10, 10, 10, 0.3);
         display: table-cell;
         vertical-align: middle;
-        padding: 0 2em;
+    }
+
+    .post-header-title h1 {
+        font-size: 4em;
+        padding-bottom: 0.5em;
+        font-family: "Source serif Pro", serif;
     }
 
     .post-header-title h3 {
-        color: #d2d2d2;
+        font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+        font-size: 2em;
+    }
+
+    .post-header-title h6 {
+        font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+        font-size: 1.2em;
     }
 
     .post-body {
+        font-family: "Source serif Pro", serif;
         text-align: justify;
+        font-size: 1.4em;
+        padding-bottom: 0.5em;
     }
 
     .post-tags {
@@ -322,5 +336,10 @@
 
     .markdown-preview {
         background-color: #dadada;
+    }
+
+    .hljs {
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
     }
 </style>

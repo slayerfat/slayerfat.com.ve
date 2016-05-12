@@ -28,12 +28,12 @@
                     </a>
                 </div>
                 <div class="media-object-section main-section">
-                    <h4>
+                    <h4 class="post-title">
                         <a v-link="{name: 'posts.show', params: {slug: post.slug}}">
                             {{ post.title }}
                         </a>
                     </h4>
-                    <p>{{ post.summary }}</p>
+                    <p class="post-summary">{{ post.summary }}</p>
                     <p>
                         <span class="secondary label post-tags"
                               v-for="tag in post.tags"
@@ -154,5 +154,13 @@
 
     .post-tags {
         margin-right: 10px;
+    }
+
+    .post-title {
+        font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    }
+
+    .post-summary {
+        font-family: "Source serif Pro", serif;
     }
 </style>
