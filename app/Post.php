@@ -93,6 +93,77 @@ class Post extends Model implements SluggableInterface
     ];
 
     /**
+     * Forces Capitalization of title first letter.
+     *
+     * @param string $value
+     * @return string
+     */
+    public function setTitleAttribute($value)
+    {
+        return $this->attributes['title'] = ucfirst($value);
+    }
+
+    /**
+     * @param string $value
+     * @return string
+     */
+    public function setSummaryAttribute($value)
+    {
+        return $this->attributes['summary'] = $this->addPeriodAndCapitalize($value);
+    }
+
+    /**
+     * Check if last char is dot and returns it with first letter capitalized.
+     *
+     * @param string $value
+     * @return string
+     */
+    private function addPeriodAndCapitalize($value)
+    {
+        if (substr($value, -1) !== '.') {
+            $value .= '.';
+        }
+
+        return ucfirst($value);
+    }
+
+    /**
+     * @param string $value
+     * @return string
+     */
+    public function setBodyOneAttribute($value)
+    {
+        return $this->attributes['body_one'] = $this->addPeriodAndCapitalize($value);
+    }
+
+    /**
+     * @param string $value
+     * @return string
+     */
+    public function setBodyTwoAttribute($value)
+    {
+        return $this->attributes['body_two'] = $this->addPeriodAndCapitalize($value);
+    }
+
+    /**
+     * @param string $value
+     * @return string
+     */
+    public function setBodyThreeAttribute($value)
+    {
+        return $this->attributes['body_three'] = $this->addPeriodAndCapitalize($value);
+    }
+
+    /**
+     * @param string $value
+     * @return string
+     */
+    public function setBodyFourAttribute($value)
+    {
+        return $this->attributes['body_four'] = $this->addPeriodAndCapitalize($value);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|\Illuminate\Database\Query\Builder
      */
     public function user()

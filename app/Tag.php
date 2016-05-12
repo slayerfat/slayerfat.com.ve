@@ -37,6 +37,17 @@ class Tag extends Model
     ];
 
     /**
+     * Forces Capitalization of name first letter.
+     *
+     * @param string $value
+     * @return string
+     */
+    public function setNameAttribute($value)
+    {
+        return $this->attributes['name'] = ucfirst($value);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany|\Illuminate\Database\Query\Builder
      */
     public function posts()
