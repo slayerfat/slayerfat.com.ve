@@ -211,7 +211,7 @@
             // https://github.com/vuejs/vue-resource/blob/master/docs/resource.md
             this.resource = this.$resource('posts{/id}');
 
-            this.resource.get({id: this.$route.params.id}).then(function (response) {
+            this.$http.get('posts{/slug}', {slug: this.$route.params.slug}).then(function (response) {
                 this.$set('post', response.data);
                 this.loader.loading = false;
             }, function () {

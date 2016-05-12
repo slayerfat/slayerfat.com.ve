@@ -66,7 +66,7 @@ router.map({
         name: 'posts.index',
         component: Post
     },
-    'blog/:id': {
+    'blog/:slug': {
         name: 'posts.show',
         component: PostShow
     },

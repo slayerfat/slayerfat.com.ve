@@ -23,13 +23,13 @@
             <h4 v-if="posts.length == 0">No hay entradas disponibles</h4>
             <div class="media-object stack-for-small" v-for="post in posts">
                 <div class="media-object-section">
-                    <a v-link="{name: 'posts.show', params: {id: post.id}}">
+                    <a v-link="{name: 'posts.show', params: {slug: post.slug}}">
                         <img :src="post.thumbnails | arrayRandom">
                     </a>
                 </div>
                 <div class="media-object-section main-section">
                     <h4>
-                        <a v-link="{name: 'posts.show', params: {id: post.id}}">
+                        <a v-link="{name: 'posts.show', params: {slug: post.slug}}">
                             {{ post.title }}
                         </a>
                     </h4>

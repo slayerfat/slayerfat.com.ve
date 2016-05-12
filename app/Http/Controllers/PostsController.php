@@ -32,13 +32,13 @@ class PostsController extends Controller
     }
 
     /**
-     * @param $id
+     * @param string $slug
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
         /** @var Post $post */
-        $post  = Post::findOrFail($id)->load('tags');
+        $post  = Post::findBySlugOrIdOrFail($slug)->load('tags');
         $dates = $this->makePostDates($post);
 
         $post->dates = $dates;
