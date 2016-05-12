@@ -2,6 +2,14 @@
 @import "font-awesome";
 @import "highlight-monokai";
 @import url("https://fonts.googleapis.com/css?family=Oswald|Montserrat|Source+Sans+Pro|Source+Serif+Pro|Open+Sans+Condensed:300");
+// vue components
+@import "vue-components/navbar";
+@import "vue-components/footer";
+@import "vue-components/greeter";
+@import "vue-components/knowledge/knowledge";
+@import "vue-components/posts/index";
+@import "vue-components/posts/show";
+@import "vue-components/tags/index";
 
 .loader-wrap {
   height: 100%;

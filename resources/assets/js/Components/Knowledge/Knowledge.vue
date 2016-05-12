@@ -168,10 +168,3 @@ export class AppComponent { }
         }
     };
 </script>
-
-<style>
-    .jumbo {
-        padding: 4em 0;
-        text-align: justify;
-    }
-</style>

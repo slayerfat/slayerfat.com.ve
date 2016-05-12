@@ -49,13 +49,3 @@
         }
     };
 </script>
-
-<style>
-    .top-bar, .top-bar ul {
-        background-color: #504C4C;
-    }
-
-    .top-bar a, .top-bar {
-        color: white;
-    }
-</style>
