@@ -8,11 +8,11 @@ Vue.use(VueRouter);
 
 import Greeter from './Components/Greeter.vue';
 import Knowledge from './Components/Knowledge/Knowledge.vue';
-import Videos from './Components/Videos/Videos.vue';
+import VideosIndex from './Components/Videos/Index.vue';
 import Navbar from './Components/Navbar.vue';
 import Footer from './Components/Footer.vue';
-import Tags from './Components/Tags/Tags.vue';
-import Post from './Components/Posts/Post.vue';
+import TagsIndex from './Components/Tags/Index.vue';
+import PostIndex from './Components/Posts/Index.vue';
 import PostCreate from './Components/Posts/Create.vue';
 import PostShow from './Components/Posts/Show.vue';
 import {getCurrentUser} from './getCurrentUser'
@@ -55,16 +55,16 @@ router.map({
     },
     '/etiquetas': {
         name: 'tags.index',
-        component: Tags,
+        component: TagsIndex,
         auth: true
     },
     '/videos': {
         name: 'videos.index',
-        component: Videos
+        component: VideosIndex
     },
     '/blog': {
         name: 'posts.index',
-        component: Post
+        component: PostIndex
     },
     'blog/:slug': {
         name: 'posts.show',
@@ -106,14 +106,6 @@ router.beforeEach(function (transition) {
     }
 });
 
-var App = Vue.extend({
-    components: {
-        navbar: Navbar,
-        greeter: Greeter,
-        videos: Videos,
-        tags: Tags,
-        "my-footer": Footer
-    }
-});
+var App = Vue.extend();
 
 router.start(App, '#app');
