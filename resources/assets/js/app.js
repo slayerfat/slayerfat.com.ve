@@ -1,86 +1,40 @@
+// App routes.
+import routes from './routes';
+
+// Filters.
+import {markdown} from './Filters/markdown';
+import {arrayRandom} from './Filters/arrayRandom';
+import {fontAwesomeClass} from './Filters/fontAwesomeClass';
+
+// Helpers.
+import {getCurrentUser} from './getCurrentUser'
+
 var Vue = require('vue');
 Vue.use(require('vue-resource'));
 Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('content');
 
-// Define some routes.
+// define the router.
 var VueRouter = require('vue-router');
 Vue.use(VueRouter);
-
-import Greeter from './Components/Greeter.vue';
-import Knowledge from './Components/Knowledge/Knowledge.vue';
-import VideosIndex from './Components/Videos/Index.vue';
-import Navbar from './Components/Navbar.vue';
-import Footer from './Components/Footer.vue';
-import TagsIndex from './Components/Tags/Index.vue';
-import PostIndex from './Components/Posts/Index.vue';
-import PostCreate from './Components/Posts/Create.vue';
-import PostShow from './Components/Posts/Show.vue';
-import {getCurrentUser} from './getCurrentUser'
-
-Vue.filter('fontAwesomeClass', function (value) {
-    return 'fa fa-' + value;
-});
-
-// https://github.com/chjj/marked
-Vue.filter('markdown', function (value) {
-    var marked = require('marked');
-    marked.setOptions({
-        langPrefix: 'hljs ', // workaround https://github.com/chjj/marked/pull/418
-
-        highlight: function (code) {
-            return require('highlight.js').highlightAuto(code).value;
-        }
-    });
-    return marked(value);
-});
-
-Vue.filter('arrayRandom', function (value) {
-    return value[Math.floor(Math.random() * value.length)];
-});
-
 var router = new VueRouter();
+
+// using the filters.
+Vue.filter('fontAwesomeClass', fontAwesomeClass);
+Vue.filter('markdown', markdown);
+Vue.filter('arrayRandom', arrayRandom);
 
 // Each route should map to a component. The "component" can
 // either be an actual component constructor created via
 // Vue.extend(), or just a component options object.
 // We'll talk about nested routes later.
-router.map({
-    '/': {
-        name: '/',
-        component: Greeter
-    },
-    '/conocimientos': {
-        name: 'knowledge',
-        component: Knowledge
-    },
-    '/etiquetas': {
-        name: 'tags.index',
-        component: TagsIndex,
-        auth: true
-    },
-    '/videos': {
-        name: 'videos.index',
-        component: VideosIndex
-    },
-    '/blog': {
-        name: 'posts.index',
-        component: PostIndex
-    },
-    'blog/:slug': {
-        name: 'posts.show',
-        component: PostShow
-    },
-    'blog/crear': {
-        name: 'posts.create',
-        component: PostCreate,
-        auth: true
-    }
-});
+router.map(routes);
 
+// checks how many times the user has being tracked for auth.
 if (router.counter !== 'undefined') {
     router.counter = 0;
 }
 
+// before each route call.
 router.beforeEach(function (transition) {
     let authenticated = false;
 
