@@ -184,7 +184,14 @@
             thumbnailsArray() {
                 let array = this.thumbnails.split(',');
                 array.forEach(function (element, index, data) {
-                    data[index] = element.trim();
+                    let value = element.trim();
+
+                    // we need to make sure that the element is not
+                    // empty, if so, we remove it from the array.
+                    if (value == '') {
+                        return data.splice(index, 1);
+                    }
+                    data[index] = value;
                 });
                 return array;
             }
