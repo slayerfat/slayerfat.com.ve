@@ -4,6 +4,7 @@ namespace App;
 
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
+use Date;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -91,6 +92,23 @@ class Post extends Model implements SluggableInterface
     protected $casts = [
         'thumbnails' => 'array',
     ];
+
+    /**
+     * Creates various date elements for the views.
+     *
+     * @return \App\Post
+     */
+    public function withDates()
+    {
+        // we need to parse the date.
+        $date = Date::parse($this->publish_date);
+
+        $this->attributes['dates']              = [];
+        $this->attributes['dates']['formatted'] = $date->diffForHumans();
+        $this->attributes['dates']['formal']    = 'Caracas, ' . $date->format('l j F \d\e Y');
+
+        return $this;
+    }
 
     /**
      * Forces Capitalization of title first letter.

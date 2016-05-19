@@ -8,7 +8,6 @@ use App\Http\Requests\PostUpdateRequest;
 use App\Post;
 use App\Tag;
 use Auth;
-use Date;
 
 class PostsController extends Controller
 {
@@ -28,26 +27,9 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return Post::all()->load('tags')->each(function ($post) {
-            $post->dates = $this->makePostDates($post);
+        return Post::all()->load('tags')->each(function (Post $post) {
+            $post->withDates();
         });
-    }
-
-    /**
-     * Creates various date elements for the views.
-     *
-     * @internal factor it out to the model.
-     * @param $post
-     * @return array
-     */
-    private function makePostDates($post)
-    {
-        $dates              = [];
-        $date               = Date::parse($post->publish_date);
-        $dates['formatted'] = $date->diffForHumans();
-        $dates['formal']    = 'Caracas, ' . $date->format('l j F \d\e Y');
-
-        return $dates;
     }
 
     /**
@@ -59,8 +41,8 @@ class PostsController extends Controller
     public function show($slug)
     {
         /** @var Post $post */
-        $post        = Post::findBySlugOrIdOrFail($slug)->load('tags');
-        $post->dates = $this->makePostDates($post);
+        $post = Post::findBySlugOrIdOrFail($slug)->load('tags');
+        $post->withDates();
 
         return $post;
     }

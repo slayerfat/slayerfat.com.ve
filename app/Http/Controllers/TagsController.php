@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Requests\TagRequest;
+use App\Post;
 use App\Tag;
 
 class TagsController extends Controller
@@ -81,6 +82,8 @@ class TagsController extends Controller
      */
     public function posts($id)
     {
-        return Tag::findOrFail($id)->load('posts', 'posts.tags')->posts;
+        return Tag::findOrFail($id)->load('posts', 'posts.tags')->posts->each(function (Post $post) {
+            $post->withDates();
+        });
     }
 }
