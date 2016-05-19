@@ -25,10 +25,10 @@ class PostRequest extends Request
     {
         return [
             'title'        => 'required|between:5,255|string',
-            'body_one'     => 'required',
-            'body_two'     => 'required_with:body_one',
-            'body_three'   => 'required_with_all:body_one,body_two',
-            'body_four'    => 'required_with_all:body_one,body_two,body_three',
+            'body_one'     => 'required|min:5',
+            'body_two'     => 'required_with:body_three|required_with:body_four|min:5',
+            'body_three'   => 'required_with:body_four|min:5',
+            'body_four'    => 'min:5',
             'summary'      => 'required|string|min:5',
             'publish_date' => 'required|date',
             'thumbnails'   => 'required',

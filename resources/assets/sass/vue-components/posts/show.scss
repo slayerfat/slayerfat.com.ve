@@ -10,6 +10,10 @@
   display: table;
   color: white;
   text-shadow: 0 0 10px black;
+
+  .help-text {
+    color: white;
+  }
 }
 
 .post-header-title {
@@ -52,10 +56,6 @@
 
 .post-tags {
   margin-right: 10px;
-}
-
-.help-text {
-  color: white;
 }
 
 .markdown-preview {

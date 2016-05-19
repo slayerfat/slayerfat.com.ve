@@ -4,7 +4,7 @@
         <div class="small-12 columns">
             <h2>Crear nueva Entrada</h2>
 
-            <form @submit="store()">
+            <form @submit.prevent="store()">
                 <label>Título
                     <input type="text" v-model="title">
                 </label>
