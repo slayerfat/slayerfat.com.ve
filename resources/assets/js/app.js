@@ -43,11 +43,15 @@ router.beforeEach(function (transition) {
     } else if (typeof router.user === 'undefined') {
         getCurrentUser(Vue.http).then(function (user) {
             router.user = user;
-        }, function() {console.log('user failed')});
+            authenticated = user.admin;
+        }, function () {
+            console.log('user failed')
+        });
     } else if (router.counter <= 5) {
         getCurrentUser(Vue.http).then(function (user) {
             router.user = user;
-        }, function(user) {
+            authenticated = user.admin;
+        }, function (user) {
             router.user = user;
         });
     }
