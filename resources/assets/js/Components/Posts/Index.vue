@@ -10,6 +10,12 @@
                 >
                     Crear
                 </a>
+                <a class="button secondary"
+                   v-if="isAdmin"
+                   @click.prevent="getUnpublished"
+                >
+                    Por publicar
+                </a>
             </p>
             <p>
                 <a class="button"
@@ -131,7 +137,6 @@
                     this.loader.loading = true;
                     this.filtered = true;
                     this.$set('posts', response.data);
-                    this.$set('currentPosts', response.data);
                     this.loader.loading = false;
                 }, function () {
                     console.log('error tag posts');
@@ -143,6 +148,19 @@
                 this.$set('posts', this.currentPosts);
                 this.filtered = false;
                 this.loader.loading = false;
+            },
+
+            getUnpublished() {
+                this.loader.loading = true;
+
+                this.$http.get('posts/unpublished').then(function(response) {
+                    this.filtered = true;
+                    this.$set('posts', response.data);
+                    this.loader.loading = false;
+                }, function() {
+                    console.log("error, unpublished");
+                    this.loader.loading = false;
+                });
             }
         },
 
