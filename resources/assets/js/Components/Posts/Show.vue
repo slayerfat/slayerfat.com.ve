@@ -1,7 +1,7 @@
 <template>
     <navbar></navbar>
     <loader :loading="loader.loading"></loader>
-    <div class="post-header" style="background-image: url(http://i.imgur.com/Cbo4G.png)" v-if="post">
+    <div class="post-header" :style="{'background-image': 'url(' + backgroundImg('h') + ')'}" v-if="post">
         <div class="post-header-title">
             <div class="row">
                 <div class="column">
@@ -162,6 +162,7 @@
     import MyFooter from "./../Footer.vue";
     import Loader from "./../Loader.vue";
     import {makeComponentsUser} from "./../../makeComponentsUser";
+    import {imgurlImageResizer} from "./../../Filters/imgurlImageResizer";
     export default {
         data () {
             return {
@@ -220,6 +221,14 @@
         },
 
         methods: {
+            backgroundImg(type) {
+                if (this.post && this.post.thumbnails.length > 0) {
+                    return imgurlImageResizer(this.post.thumbnails[0], type);
+                }
+
+                return imgurlImageResizer(null, type);
+            },
+
             startEditing(attribute) {
                 if (!this.isAdmin || this.errorMsg) {
                     return;

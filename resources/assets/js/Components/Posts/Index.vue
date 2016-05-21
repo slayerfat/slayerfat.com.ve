@@ -10,6 +10,12 @@
                 >
                     Crear
                 </a>
+                <a class="button secondary"
+                   v-if="isAdmin"
+                   @click.prevent="getUnpublished"
+                >
+                    Por publicar
+                </a>
             </p>
             <p>
                 <a class="button"
@@ -24,7 +30,7 @@
             <div class="media-object stack-for-small" v-for="post in posts">
                 <div class="media-object-section">
                     <a v-link="{name: 'posts.show', params: {slug: post.slug}}">
-                        <img :src="post.thumbnails | arrayRandom">
+                        <img :src="backgroundImg(post.thumbnails, 'm')">
                     </a>
                 </div>
                 <div class="media-object-section main-section">
@@ -57,6 +63,8 @@
     import MyFooter from "./../Footer.vue";
     import Loader from "./../Loader.vue";
     import {makeComponentsUser} from "./../../makeComponentsUser";
+    import {imgurlImageResizer} from "./../../Filters/imgurlImageResizer";
+    import {arrayRandom} from "./../../Filters/arrayRandom";
     export default {
         data () {
             return {
@@ -118,12 +126,17 @@
         },
 
         methods: {
+            backgroundImg(data, type) {
+                let url = arrayRandom(data);
+
+                return imgurlImageResizer(url, type);
+            },
+
             filterByTag(tag) {
                 this.$http.get('tags{/id}/posts', {id: tag.id}).then(function (response) {
                     this.loader.loading = true;
                     this.filtered = true;
                     this.$set('posts', response.data);
-                    this.$set('currentPosts', response.data);
                     this.loader.loading = false;
                 }, function () {
                     console.log('error tag posts');
@@ -135,6 +148,19 @@
                 this.$set('posts', this.currentPosts);
                 this.filtered = false;
                 this.loader.loading = false;
+            },
+
+            getUnpublished() {
+                this.loader.loading = true;
+
+                this.$http.get('posts/unpublished').then(function(response) {
+                    this.filtered = true;
+                    this.$set('posts', response.data);
+                    this.loader.loading = false;
+                }, function() {
+                    console.log("error, unpublished");
+                    this.loader.loading = false;
+                });
             }
         },
 

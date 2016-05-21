@@ -27,9 +27,29 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return Post::all()->load('tags')->each(function (Post $post) {
-            $post->withDates();
-        });
+        return Post::published()
+            ->orderBy('publish_date', 'desc')
+            ->get()
+            ->load('tags')
+            ->each(function (Post $post) {
+                $post->withDates();
+            });
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function unpublished()
+    {
+        return Post::unpublished()
+            ->orderBy('publish_date', 'desc')
+            ->get()
+            ->load('tags')
+            ->each(function (Post $post) {
+                $post->withDates();
+            });
     }
 
     /**

@@ -2,9 +2,11 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use Date;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -38,6 +40,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Post wherePublishDate($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Post whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Post whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Post published()
+ * @method static \Illuminate\Database\Query\Builder|\App\Post unpublished()
  * @mixin \Eloquent
  */
 class Post extends Model implements SluggableInterface
@@ -179,6 +183,26 @@ class Post extends Model implements SluggableInterface
     public function setBodyFourAttribute($value)
     {
         return $this->attributes['body_four'] = $this->addPeriodAndCapitalize($value);
+    }
+
+    /**
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
+     * @return $this
+     */
+    public function scopePublished(Builder $query)
+    {
+        return $query->where('publish_date', '<=', Carbon::now());
+    }
+
+    /**
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
+     * @return $this
+     */
+    public function scopeUnpublished(Builder $query)
+    {
+        return $query->where('publish_date', '>=', Carbon::now());
     }
 
     /**
