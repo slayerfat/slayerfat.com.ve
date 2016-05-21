@@ -24,8 +24,8 @@ elixir(function (mix) {
     mix.copy(paths.animateCss, paths.public + '/css/animate.min.css');
     mix.copy(paths.lazyLoad, paths.public + '/js/jquery.lazyload.js');
     mix.copy(paths.jquery, paths.public + '/js/jquery.js');
-    mix.version(['css/app.css']);
     mix.browserify('app.js');
+    mix.version(['css/app.css', 'js/app.js']);
     if (elixir.config.production != true) {
         mix.browserSync({
             proxy: 'slayerfat.app'

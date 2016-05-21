@@ -44,7 +44,7 @@ Google hire me:
 
 @yield('content')
 
-<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ elixir('js/app.js') }}"></script>
 
 <!-- Yielded -->
 @yield('js')
