@@ -24,7 +24,7 @@
             <div class="media-object stack-for-small" v-for="post in posts">
                 <div class="media-object-section">
                     <a v-link="{name: 'posts.show', params: {slug: post.slug}}">
-                        <img :src="post.thumbnails | arrayRandom">
+                        <img :src="backgroundImg(post.thumbnails, 'm')">
                     </a>
                 </div>
                 <div class="media-object-section main-section">
@@ -57,6 +57,8 @@
     import MyFooter from "./../Footer.vue";
     import Loader from "./../Loader.vue";
     import {makeComponentsUser} from "./../../makeComponentsUser";
+    import {imgurlImageResizer} from "./../../Filters/imgurlImageResizer";
+    import {arrayRandom} from "./../../Filters/arrayRandom";
     export default {
         data () {
             return {
@@ -118,6 +120,12 @@
         },
 
         methods: {
+            backgroundImg(data, type) {
+                let url = arrayRandom(data);
+
+                return imgurlImageResizer(url, type);
+            },
+
             filterByTag(tag) {
                 this.$http.get('tags{/id}/posts', {id: tag.id}).then(function (response) {
                     this.loader.loading = true;
